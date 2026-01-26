@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natflix - Transforme Seu Corpo e Sua Vida</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ff6689 0%, #ff3366 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 4px 4px 20px rgba(0,0,0,0.7);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 4px 4px 20px rgba(0,0,0,0.7); }
+            to { text-shadow: 0 0 30px rgba(255,255,255,0.8), 4px 4px 20px rgba(0,0,0,0.7); }
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.7);
+        }
+
+        .hero .subtitle {
+            font-size: 1.8em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 25px 60px;
+            background: #fff;
+            color: #ff6689;
+            font-size: 1.5em;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            animation: bounce 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 20px 50px rgba(255,255,255,0.3);
+            animation: none;
+        }
+
+        .trust-badges {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .video-highlight {
+            padding: 100px 20px;
+            background: #0a0a0a;
+        }
+
+        .video-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ff6689 0%, #ff3366 100%);
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255,102,137,0.5);
+        }
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-placeholder p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin-top: 60px;
+            opacity: 0.7;
+            font-size: 1.2em;
+        }
+
+        .video-placeholder iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: rgba(255,102,137,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            background: #ff6689;
+        }
+
+        .stats {
+            background: #0a0a0a;
+            padding: 80px 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ff6689 0%, #ff3366 100%);
+            border-radius: 20px;
+            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(255,102,137,0.3);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .stat-label {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .benefits {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .section-title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 70px;
+            color: #ff6689;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 10px rgba(255,102,137,0.5);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: rgba(255,102,137,0.1);
+            padding: 50px 40px;
+            border-radius: 25px;
+            border: 3px solid #ff6689;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,102,137,0.3) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s;
+        }
+
+        .benefit-card:hover::before {
+            transform: scale(1);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(255,102,137,0.5);
+            border-color: #fff;
+        }
+
+        .benefit-icon {
+            font-size: 4em;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #ff6689;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit-card p {
+            line-height: 1.8;
+            opacity: 0.9;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing {
+            background: linear-gradient(135deg, #ff6689 0%, #ff3366 100%);
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .price-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .price-header h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.7);
+        }
+
+        .price-header p {
+            font-size: 1.5em;
+            opacity: 0.95;
+        }
+
+        .price-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .price-card {
+            background: rgba(255,255,255,0.95);
+            color: #0a0a0a;
+            padding: 40px 30px;
+            border-radius: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 5px solid transparent;
+        }
+
+        .price-card.featured {
+            background: #fff;
+            transform: scale(1.05);
+            border-color: #000;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .price-label {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #ff6689;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .price-value {
+            font-size: 3em;
+            font-weight: 900;
+            color: #ff6689;
+            margin-bottom: 10px;
+        }
+
+        .price-period {
+            font-size: 1.1em;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        .price-button {
+            display: block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #ff6689 0%, #ff3366 100%);
+            color: #fff;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        .price-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .testimonials {
+            padding: 100px 20px;
+            background: #0a0a0a;
+        }
+
+        .testimonials {
+            padding: 100px 20px;
+            background: #0a0a0a;
+        }
+
+        .video-testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .video-testimonial-card {
+            background: linear-gradient(135deg, rgba(255,102,137,0.2) 0%, rgba(255,51,102,0.2) 100%);
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px solid #ff6689;
+            transition: all 0.3s;
+        }
+
+        .video-testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255,102,137,0.4);
+        }
+
+        .video-mini {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .video-mini iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .play-button-mini {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,102,137,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-button-mini:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            background: #ff6689;
+        }
+
+        .video-caption {
+            text-align: center;
+            font-weight: 700;
+            color: #ff6689;
+            font-size: 1.1em;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 60px auto 0;
+        }
+
+        .testimonial {
+            background: linear-gradient(135deg, rgba(255,102,137,0.1) 0%, rgba(255,51,102,0.1) 100%);
+            padding: 40px;
+            border-radius: 25px;
+            border-left: 5px solid #ff6689;
+            transition: all 0.3s;
+        }
+
+        .testimonial:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 40px rgba(255,102,137,0.3);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            opacity: 0.95;
+            font-size: 1.1em;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: #ff6689;
+            font-size: 1.2em;
+        }
+
+        .final-cta {
+            background: linear-gradient(135deg, #ff6689 0%, #ff3366 100%);
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.7);
+        }
+
+        .final-cta p {
+            font-size: 1.8em;
+            margin-bottom: 50px;
+            opacity: 0.95;
+        }
+
+        .guarantee {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 50px auto 0;
+            max-width: 600px;
+            border: 3px solid #fff;
+        }
+
+        .guarantee h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #000;
+            padding: 40px 20px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2em; }
+            .logo { font-size: 2.8em; }
+            .hero .subtitle { font-size: 1.3em; }
+            .section-title { font-size: 2em; }
+            .cta-button { font-size: 1.2em; padding: 20px 40px; }
+            .stat-number { font-size: 3em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <div class="logo">NATFLIX</div>
+            <h1>A Maior Plataforma Fitness<br>do Brasil</h1>
+            <p class="subtitle">Feita para mulheres reais que querem transformar o corpo e a vida</p>
+            <a href="#pricing" class="cta-button">Começar Agora</a>
+            <div class="trust-badges">
+                <div class="badge">✓ +90 mil alunas</div>
+                <div class="badge">✓ +2.600 conteúdos</div>
+                <div class="badge">✓ 4 anos de sucesso</div>
+            </div>
+        </div>
+    </div>
+
+            <div class="video-highlight">
+        <div class="container">
+            <h2 class="section-title">Veja Como Funciona</h2>
+            <div class="video-wrapper">
+                <div class="video-placeholder">
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/By1lQobm5f8?si=N9VBtdVPR18wtgB_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">90K+</div>
+                <div class="stat-label">Mulheres Transformadas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2.600+</div>
+                <div class="stat-label">Conteúdos Publicados</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Focado em Você</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Acesso Total</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="benefits">
+        <div class="container">
+            <h2 class="section-title">O que você vai encontrar</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💪</div>
+                    <h3>Treinos Completos</h3>
+                    <p>Academia, casa, CrossNatflix, pilates, spinning, yoga e muito mais. Renováveis a cada 5 semanas!</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <h3>Fichas Editáveis</h3>
+                    <p>Anote suas cargas e acompanhe sua evolução semana a semana de forma organizada.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🍎</div>
+                    <h3>Nutrição Completa</h3>
+                    <p>Cardápios por objetivo, receitas fit e aulas semanais com nutricionista.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Para Todos os Níveis</h3>
+                    <p>Do iniciante ao avançado, treinos personalizados para seu momento atual.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🧠</div>
+                    <h3>Saúde Mental</h3>
+                    <p>Acompanhamento com psicóloga para fortalecer sua mente junto com o corpo.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <h3>Suporte Real</h3>
+                    <p>Atendimento humano e direto, sem robôs. Estamos aqui para você!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pricing" id="pricing">
+        <div class="price-container">
+            <div class="price-header">
+                <h2>Escolha Seu Plano</h2>
+                <p>Invista em você e comece sua transformação hoje</p>
+            </div>
+            <div class="price-cards">
+                <div class="price-card">
+                    <div class="price-label">Mensal</div>
+                    <div class="price-value">R$ 64,90</div>
+                    <div class="price-period">/mês</div>
+                    <p>Renovação mensal</p>
+                    <a href="https://go.hotmart.com/K104010776I?ap=58d2" class="price-button">Assinar</a>
+                </div>
+                <div class="price-card">
+                    <div class="price-label">Trimestral</div>
+                    <div class="price-value">R$ 57,90</div>
+                    <div class="price-period">/mês</div>
+                    <p>R$ 173,70 à vista</p>
+                    <a href="https://go.hotmart.com/K104010776I?ap=48a9" class="price-button">Assinar</a>
+                </div>
+                <div class="price-card featured">
+                    <div class="price-label">🔥 Anual</div>
+                    <div class="price-value">R$ 44,90</div>
+                    <div class="price-period">/mês</div>
+                    <p>R$ 538,80 à vista</p>
+                    <p style="margin-top: 10px; font-weight: 700; color: #ff6689;">MELHOR OFERTA</p>
+                    <a href="https://go.hotmart.com/K104010776I?ap=5034" class="price-button">Assinar</a>
+                </div>
+                <div class="price-card">
+                    <div class="price-label">Semestral</div>
+                    <div class="price-value">R$ 52,90</div>
+                    <div class="price-period">/mês</div>
+                    <p>R$ 317,40 à vista</p>
+                    <a href="https://go.hotmart.com/K104010776I?ap=5ece" class="price-button">Assinar</a>
+                </div>
+            </div>
+            <div class="guarantee">
+                <h3>🛡️ Garantia de 7 Dias</h3>
+                <p>Não gostou? Devolvemos seu dinheiro, sem perguntas!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="final-cta">
+        <div class="container">
+            <h2>Sua Transformação<br>Começa Agora</h2>
+            <p>Junte-se a mais de 90 mil mulheres que já mudaram de vida</p>
+            <a href="#pricing" class="cta-button">Começar Minha Jornada</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Natflix Fitness. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px;">Profissionais responsáveis: Renan Dias - CREF: RJ-049129 | Pamela Raquel - CREF 007463-G/PA</p>
+        </div>
+    </footer>
+</body>
+</html>
